@@ -1,0 +1,155 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+    transition: background 1s ease;
+}
+
+body.initial {
+    background: #ffffff;
+}
+
+body.transformed {
+    background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 50%, #16213e 100%);
+}
+
+#game-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+#spider-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.spider {
+    position: absolute;
+    cursor: grab;
+    user-select: none;
+    transition: transform 0.1s ease;
+    z-index: 10;
+}
+
+.spider:active {
+    cursor: grabbing;
+}
+
+.spider img {
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.spider.large {
+    width: 150px;
+    height: 150px;
+}
+
+.spider.medium {
+    width: 100px;
+    height: 100px;
+}
+
+.spider.small {
+    width: 70px;
+    height: 70px;
+}
+
+#split-spider {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 150px;
+    z-index: 5;
+}
+
+#split-spider.hidden {
+    display: none;
+}
+
+.split-half {
+    position: absolute;
+    width: 75px;
+    height: 150px;
+    background-size: 150px 150px;
+    background-repeat: no-repeat;
+    transition: transform 1.5s ease;
+}
+
+.split-left {
+    left: 0;
+    background-image: url('spider.jpg');
+    background-position: left center;
+}
+
+.split-right {
+    right: 0;
+    background-image: url('spider.jpg');
+    background-position: right center;
+}
+
+.split-left.split-active {
+    transform: translateX(-60px);
+}
+
+.split-right.split-active {
+    transform: translateX(60px);
+}
+
+#enter-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    padding: 20px 40px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: 3px solid #ffffff;
+    border-radius: 50px;
+    cursor: pointer;
+    z-index: 100;
+    box-shadow: 0 0 30px rgba(102, 126, 234, 0.6);
+    transition: all 0.3s ease;
+    letter-spacing: 2px;
+}
+
+#enter-button.visible {
+    transform: translate(-50%, -50%) scale(1);
+    animation: pulse 2s infinite;
+}
+
+#enter-button:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    box-shadow: 0 0 50px rgba(102, 126, 234, 0.9);
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
+#enter-button:active {
+    transform: translate(-50%, -50%) scale(0.95);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 30px rgba(102, 126, 234, 0.6);
+    }
+    50% {
+        box-shadow: 0 0 50px rgba(102, 126, 234, 0.9);
+    }
+}
+
+.dragging {
+    z-index: 1000 !important;
+    opacity: 0.8;
+}
