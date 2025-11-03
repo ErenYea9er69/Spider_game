@@ -18,7 +18,7 @@ function createSpider(size, x, y) {
     spider.dataset.size = size;
     
     const img = document.createElement('img');
-    img.src = 'spider.jpg';
+    img.src = 'spider.png';
     img.alt = 'spider';
     spider.appendChild(img);
     
