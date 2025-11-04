@@ -30,7 +30,11 @@ function createSpider(size, x, y) {
 }
 
 function initializeSpiders() {
-    const sizes = ['large', 'large', 'medium', 'medium', 'medium', 'small', 'small', 'small', 'small'];
+    const sizes = [
+        'large', 'large', 'large',
+        'medium', 'medium', 'medium', 'medium', 'medium',
+        'small', 'small', 'small', 'small', 'small', 'small', 'small', 'small'
+    ];
     
     sizes.forEach((size, index) => {
         const x = Math.random() * (window.innerWidth - 150);
@@ -69,9 +73,11 @@ function drag(e) {
 function endDrag(e) {
     if (!draggedSpider) return;
     
+    const currentDraggedSpider = draggedSpider;
+    
     draggedSpider.classList.remove('dragging');
     
-    checkCollision();
+    checkCollision(currentDraggedSpider);
     
     document.removeEventListener('mousemove', drag);
     document.removeEventListener('mouseup', endDrag);
@@ -81,23 +87,23 @@ function endDrag(e) {
     draggedSpider = null;
 }
 
-function checkCollision() {
+function checkCollision(currentDraggedSpider) {
     if (gameUnlocked) return;
     
-    const draggedRect = draggedSpider.getBoundingClientRect();
-    const draggedSize = draggedSpider.dataset.size;
+    const draggedRect = currentDraggedSpider.getBoundingClientRect();
+    const draggedSize = currentDraggedSpider.dataset.size;
     
     if (draggedSize !== 'large') return;
     
     spiders.forEach(spider => {
-        if (spider === draggedSpider) return;
+        if (spider === currentDraggedSpider) return;
         if (spider.dataset.size !== 'large') return;
         
         const spiderRect = spider.getBoundingClientRect();
         
         if (isOverlapping(draggedRect, spiderRect)) {
             targetSpider = spider;
-            triggerSplit(spider);
+            triggerSplit(spider, currentDraggedSpider);
         }
     });
 }
@@ -109,7 +115,7 @@ function isOverlapping(rect1, rect2) {
              rect1.top > rect2.bottom);
 }
 
-function triggerSplit(spider) {
+function triggerSplit(spider, draggedSpiderElement) {
     gameUnlocked = true;
     
     const rect = spider.getBoundingClientRect();
@@ -118,7 +124,7 @@ function triggerSplit(spider) {
     splitSpider.style.transform = 'none';
     
     spider.style.display = 'none';
-    draggedSpider.style.display = 'none';
+    draggedSpiderElement.style.display = 'none';
     
     splitSpider.classList.remove('hidden');
     
