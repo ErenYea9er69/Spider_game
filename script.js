@@ -30,18 +30,16 @@ function createSpider(size, x, y) {
 }
 
 function initializeSpiders() {
-    const sizes = [
-        'large', 'large', 'large',
-        'medium', 'medium', 'medium', 'medium', 'medium',
-        'small', 'small', 'small', 'small', 'small', 'small', 'small', 'small'
-    ];
+    const sizeOptions = ['large', 'medium', 'small'];
+    const numberOfSpiders = 32;
     
-    sizes.forEach((size, index) => {
+    for (let i = 0; i < numberOfSpiders; i++) {
+        const randomSize = sizeOptions[Math.floor(Math.random() * sizeOptions.length)];
         const x = Math.random() * (window.innerWidth - 150);
         const y = Math.random() * (window.innerHeight - 150);
-        const spider = createSpider(size, x, y);
+        const spider = createSpider(randomSize, x, y);
         spiders.push(spider);
-    });
+    }
 }
 
 function startDrag(e) {
