@@ -88,13 +88,13 @@ body.transformed {
 
 .split-left {
     left: 0;
-    background-image: url('spider.jpg');
+    background-image: url('spider.png');
     background-position: left center;
 }
 
 .split-right {
     right: 0;
-    background-image: url('spider.jpg');
+    background-image: url('spider.png');
     background-position: right center;
 }
 
