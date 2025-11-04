@@ -30,11 +30,32 @@ function createSpider(size, x, y) {
 }
 
 function initializeSpiders() {
-    const sizeOptions = ['large', 'medium', 'small'];
     const numberOfSpiders = 32;
     
-    for (let i = 0; i < numberOfSpiders; i++) {
-        const randomSize = sizeOptions[Math.floor(Math.random() * sizeOptions.length)];
+    // Create exactly 2 large spiders first
+    for (let i = 0; i < 2; i++) {
+        const x = Math.random() * (window.innerWidth - 150);
+        const y = Math.random() * (window.innerHeight - 150);
+        const spider = createSpider('large', x, y);
+        spiders.push(spider);
+    }
+    
+    // Create remaining spiders with random sizes (excluding large)
+    for (let i = 2; i < numberOfSpiders; i++) {
+        // Generate random size with more variety
+        const randomValue = Math.random();
+        let randomSize;
+        
+        if (randomValue < 0.3) {
+            randomSize = 'tiny';
+        } else if (randomValue < 0.5) {
+            randomSize = 'small';
+        } else if (randomValue < 0.75) {
+            randomSize = 'medium';
+        } else {
+            randomSize = 'big';
+        }
+        
         const x = Math.random() * (window.innerWidth - 150);
         const y = Math.random() * (window.innerHeight - 150);
         const spider = createSpider(randomSize, x, y);
@@ -154,7 +175,7 @@ function triggerSplit(spider, draggedSpiderElement) {
 }
 
 enterButton.addEventListener('click', () => {
-    alert('Welcome to the game! 🎮\n\nThe actual game content would start here.');
+    alert('Welcome to the game! \n\nThe actual game content would start here.');
 });
 
 initializeSpiders();
