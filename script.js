@@ -120,12 +120,23 @@ function triggerSplit(spider, draggedSpiderElement) {
     splitSpider.style.left = rect.left + 'px';
     splitSpider.style.top = rect.top + 'px';
     splitSpider.style.transform = 'none';
+    splitSpider.style.transition = 'left 0.8s ease, top 0.8s ease';
     
     spider.style.display = 'none';
     draggedSpiderElement.style.display = 'none';
     
     splitSpider.classList.remove('hidden');
     
+    // Move to top-middle of page
+    setTimeout(() => {
+        const targetX = (window.innerWidth / 2) - 75; // 75 is half of spider width (150px)
+        const targetY = 20; // 20px from top
+        
+        splitSpider.style.left = targetX + 'px';
+        splitSpider.style.top = targetY + 'px';
+    }, 50);
+    
+    // Wait for movement to complete, then split
     setTimeout(() => {
         body.classList.remove('initial');
         body.classList.add('transformed');
@@ -139,7 +150,7 @@ function triggerSplit(spider, draggedSpiderElement) {
             enterButton.classList.remove('hidden');
             enterButton.classList.add('visible');
         }, 1000);
-    }, 300);
+    }, 1100);
 }
 
 enterButton.addEventListener('click', () => {
