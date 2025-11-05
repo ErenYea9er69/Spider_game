@@ -127,42 +127,31 @@ body.transformed {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
-    padding: 20px 40px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #ffffff;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border: 3px solid #ffffff;
-    border-radius: 50px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a2e;
+    background: #87ceeb;
+    border: 2px solid #5dade2;
+    border-radius: 6px;
     cursor: pointer;
     z-index: 100;
-    box-shadow: 0 0 30px rgba(102, 126, 234, 0.6);
     transition: all 0.3s ease;
-    letter-spacing: 2px;
+    letter-spacing: 0.5px;
 }
 
 #enter-button.visible {
     transform: translate(-50%, -50%) scale(1);
-    animation: pulse 2s infinite;
 }
 
 #enter-button:hover {
-    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-    box-shadow: 0 0 50px rgba(102, 126, 234, 0.9);
-    transform: translate(-50%, -50%) scale(1.05);
+    background: #5dade2;
+    border-color: #3498db;
+    transform: translate(-50%, -50%) scale(1.02);
 }
 
 #enter-button:active {
-    transform: translate(-50%, -50%) scale(0.95);
-}
-
-@keyframes pulse {
-    0%, 100% {
-        box-shadow: 0 0 30px rgba(102, 126, 234, 0.6);
-    }
-    50% {
-        box-shadow: 0 0 50px rgba(102, 126, 234, 0.9);
-    }
+    transform: translate(-50%, -50%) scale(0.98);
 }
 
 .dragging {
