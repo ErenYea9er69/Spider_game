@@ -256,8 +256,41 @@ function triggerSplit(spider, draggedSpiderElement) {
         setTimeout(() => {
             enterButton.classList.remove('hidden');
             enterButton.classList.add('visible');
+            
+            // Remove spiders that overlap with the button
+            removeSpidersInButtonArea();
         }, 1000);
     }, 1100);
+}
+
+function removeSpidersInButtonArea() {
+    // Calculate button area (center of screen)
+    const buttonX = window.innerWidth / 2;
+    const buttonY = 95; // Approximate vertical position of button (20px top + 75px half spider + some margin)
+    const buttonWidth = 300; // Approximate button width with padding
+    const buttonHeight = 80; // Approximate button height with padding
+    
+    const buttonRect = {
+        left: buttonX - buttonWidth / 2,
+        right: buttonX + buttonWidth / 2,
+        top: buttonY - buttonHeight / 2,
+        bottom: buttonY + buttonHeight / 2
+    };
+    
+    spiders.forEach(spider => {
+        if (spider.style.display === 'none') return;
+        
+        const spiderRect = spider.getBoundingClientRect();
+        
+        // Check if spider overlaps with button area
+        if (isOverlapping(spiderRect, buttonRect)) {
+            spider.style.transition = 'opacity 0.5s ease';
+            spider.style.opacity = '0';
+            setTimeout(() => {
+                spider.style.display = 'none';
+            }, 500);
+        }
+    });
 }
 
 enterButton.addEventListener('click', () => {
