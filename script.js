@@ -246,6 +246,13 @@ function triggerSplit(spider, draggedSpiderElement) {
         splitLeft.classList.add('split-active');
         splitRight.classList.add('split-active');
         
+        // Apply theme to all remaining spiders
+        spiders.forEach(s => {
+            if (s.style.display !== 'none') {
+                s.classList.add('themed');
+            }
+        });
+        
         setTimeout(() => {
             enterButton.classList.remove('hidden');
             enterButton.classList.add('visible');
